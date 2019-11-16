@@ -1,1 +1,1 @@
-So first of all I completely forgot github, I was thoroughly in the code and so I did not think compared to other projects. As for the presentation of my project, I made the 4 simplest entities and I made my crud only on category. I managed to do all this with a tutorial on youtube that I adapted to my request.
+
