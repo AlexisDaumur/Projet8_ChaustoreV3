@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+  <div class="container mt-4">
+
+    <h1>Gérer mes categories</h1>
+
+    <div class="text-right">
+      <a href="{{ path('admin.category.new') }}" class="btn btn-primary">Add category</a>
+    </div>
+
+
+    {% for message in app.flashes('success')%}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for category in categorys %}
+        <tr>
+          <td>{{ category.name }}</td>
+          <td>
+            <a href="{{ path('admin.category.edit', {id: category.id}) }}" class="btn btn-secondary">Edit</a>
+            <form method="post" action="{{ path('admin.category.delete', {id: category.id})}}" style="display: inline-block" onsubmit="return confirm('are you sure ?')">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ category.id)}}">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
+{% endblock %}
