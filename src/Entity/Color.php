@@ -28,9 +28,15 @@ class Color
      */
     private $products;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="color")
+     */
+    private $product;
+
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->product = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -79,5 +85,18 @@ class Color
         }
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProduct(): Collection
+    {
+        return $this->product;
+    }
+
+    public function __toString()
+    {
+      return $this->name;
     }
 }

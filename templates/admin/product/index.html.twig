@@ -1,20 +1,55 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello ProductController!{% endblock %}
+{% block title %}Product{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
+  <div class="container mt-4">
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
+    <h1>Gérer mes produits</h1>
 
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/alexis/Bureau/Code/ChaustoreV3/src/Controller/ProductController.php'|file_link(0) }}">src/Controller/ProductController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/alexis/Bureau/Code/ChaustoreV3/templates/product/index.html.twig'|file_link(0) }}">templates/product/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="text-right">
+      <a href="{{ path('product_new') }}" class="btn btn-primary">Add product</a>
+    </div>
+
+    {% for message in app.flashes('success')%}
+      <div class="alert alert-success">
+        {{ message }}
+      </div>
+    {% endfor %}
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+        <th>Name</th>
+        <th>Category</th>
+        <th>Brand</th>
+        <th>Color</th>
+        <th>Price</th>
+        <th>Gender</th>
+        <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for product in products %}
+        <tr>
+        <td>{{ product.name }}</td>
+        <td>{{ product.category }}</td>
+        <td>{{ product.brand }}</td>
+        <td>{{ product.color }}</td>
+        <td>{{ product.price }}</td>
+        <td>{{ product.gender }}</td>
+          <td>
+            <a href="{{ path('product_edit', {id: product.id}) }}" class="btn btn-secondary">Edit</a>
+            <form method="post" action="{{ path('product_delete', {id: product.id})}}" style="display: inline-block" onsubmit="return confirm('are you sure ?')">
+              <input type="hidden" name="_method" value="DELETE">
+              <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ product.id)}}">
+              <button class="btn btn-danger">Delete</button>
+            </form>
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+
+  </div>
 {% endblock %}

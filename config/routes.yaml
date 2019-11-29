@@ -1,26 +1,30 @@
 home:
-    path: /
-    controller: App\Controller\HomeController::index
+    path: /admin
+    controller: App\Controller\Admin\HomeController::index
 
 brand:
-    path: /brand
-    controller: App\Controller\BrandController::index
+    path: /admin/brand
+    controller: App\Controller\Admin\BrandController::index
 
 color:
-    path: /color
-    controller: App\Controller\ColorController::index
+    path: /admin/color
+    controller: App\Controller\Admin\ColorController::index
 
 size:
-    path: /size
-    controller: App\Controller\SizeController::index
+    path: /admin/size
+    controller: App\Controller\Admin\SizeController::index
 
 product:
-    path: /product
-    controller: App\Controller\ProductController::index
+    path: /admin/product
+    controller: App\Controller\Admin\ProductController::index
 
 stock:
-    path: /stock
-    controller: App\Controller\StockController::index
+    path: /admin/stock
+    controller: App\Controller\Admin\StockController::index
+
+accueil:
+    path: /
+    controller: App\Controller\AccueilController::index
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
